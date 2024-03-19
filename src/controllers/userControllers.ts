@@ -278,9 +278,9 @@ export const forgotPassword = asyncHandler(async ( req:Request, res:Response ) =
   const reply_to = EMAIL_USER;
 
   try {
-    // await sendEmail({
-    //   subject, message, send_to, sent_from, reply_to
-    // })
+    await sendEmail({
+      subject, message, send_to, sent_from, reply_to
+    })
     res.status(200).json({
       success:true, 
       message: "Reset Email Sent"})
@@ -296,7 +296,7 @@ export const resetPassword = asyncHandler(async (req: Request, res: Response) =>
   let password = req.body.password;
   // Extract the resetToken from the request params
   const { resetToken } = req.params;
-  
+
   // Hash Token then compare to DB
   const hashedToken = crypto.createHash("sha256")
     .update(resetToken)
